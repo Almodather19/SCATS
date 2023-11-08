@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://github.com/Almodather19/SCATS
+URL: https://github.com/Almodather19/SCATS, https://almodather19.github.io/SCATS/
 BugReports: https://github.com/Almodather19/SCATS/issues
 Depends: 
     R (>= 2.10)
