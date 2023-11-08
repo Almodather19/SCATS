@@ -1,0 +1,42 @@
+---
+title: "Process SCATS Data"
+output: html_notebook
+---
+
+The data that the following code will process is called SCATS data. 
+
+SCATS data taken from a system that controls traffic signals in a network. In this system each signal will have a number.
+
+Signal 6802 will be taken as an example. Data is saved in Excel file `6802.xlsx`
+
+The main aim of the following function is to get number of vehicles that go throw each approach in three peak hours.
+Peak hours are "6 to 7 am", "1 to 2 pm", and "5 to 6 pm", which are refereed to as AM, MD, and PM respectively.
+
+By understanding the flow throw different approaches in the three peaks, the timing of the signals can be altered based on the peak.
+Timing can be changed by giving more green time to an approach that have more flow than others, another way to adjust the address the high flow for one approach is to change the phasing. 
+
+```{r}
+# Load the necessary library if not already loaded
+library(dplyr)
+
+# Select the relevant columns for summing
+cols_to_sum <- c(10,17,21)
+
+# Group by Approach and calculate the sum for the selected columns
+results <- X6802 %>%
+  group_by(Approach) %>%
+  summarise(across(all_of(cols_to_sum), sum, na.rm = TRUE))
+
+# Display the result
+print(results)
+```
+
+Summarizing the data will most importantly give the maximum number of cars passing an approach in a 15 min interval:
+```{r}
+summary(X6802)
+```
+Save to data folder:
+```{r}
+usethis::use_data(X6802, overwrite = TRUE)
+```
+
