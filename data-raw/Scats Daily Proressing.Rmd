@@ -1,6 +1,8 @@
 ---
 title: "Process SCATS Data"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 The data that the following code will process is called SCATS data. 

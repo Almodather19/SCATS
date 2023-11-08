@@ -19,7 +19,7 @@
 #'
 #' @docType data
 #' @keywords datasets
-#' @name X6802
+#' @name SCATS
 #' @usage data(X6802)
 #' @source Road Management Center "RMC" Qatar.
 #' @examples
