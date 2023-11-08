@@ -30,4 +30,3 @@
 #'   summarise(across(all_of(cols_to_sum), sum, na.rm = TRUE))
 #'   print(results)
 "X6802"
-
