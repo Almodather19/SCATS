@@ -58,7 +58,7 @@ changing the phasing.
 
 The package can be installed from GitHub with:
 
-    Install.packages("devtools")
+    install.packages("devtools")
     devtools::install_github("Almodather19/SCATS")
 
     To use the package
