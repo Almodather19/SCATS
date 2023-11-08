@@ -27,6 +27,6 @@ number of vehicles going throw approaches, in 15 min interval, data extend throw
 and the sample data is taken for 19/11/2021.
 }
 \examples{
- data(X6802)
+data(X6802)
 }
 \keyword{datasets}
