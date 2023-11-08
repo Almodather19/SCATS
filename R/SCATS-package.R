@@ -23,5 +23,11 @@
 #' @usage data(X6802)
 #' @source Road Management Center "RMC" Qatar.
 #' @examples
-#'  data(X6802)
+#'  library(dplyr)
+#'  cols_to_sum <- c(10,17,21)
+#'  results <- X6802 %>%
+#'  group_by(Approach) %>%
+#'   summarise(across(all_of(cols_to_sum), sum, na.rm = TRUE))
+#'   print(results)
 "X6802"
+
