@@ -39,16 +39,16 @@ summary(X6802)
 ```
 
 ```{r}
-X6802 |>
+X6802N <- X6802 |>
   pivot_longer(cols = -c(Junctions:Interval),
                names_to = "hours",
                values_to = "vehicles")
-usethis::use_data(X6802, overwrite = TRUE)
 ```
 
 
 Save to data folder:
 ```{r}
 usethis::use_data(X6802, overwrite = TRUE)
+usethis::use_data(X6802N, overwrite = TRUE)
 ```
 
