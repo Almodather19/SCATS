@@ -43,6 +43,7 @@ X6802 |>
   pivot_longer(cols = -c(Junctions:Interval),
                names_to = "hours",
                values_to = "vehicles")
+usethis::use_data(X6802, overwrite = TRUE)
 ```
 
 
