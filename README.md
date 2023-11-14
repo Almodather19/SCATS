@@ -34,7 +34,7 @@ to approaches based on the direction of the traffic as follows:
 8.  Approach 8, Detectors: 20-23
 
 <figure>
-<img src="6802%20Layout.JPG" alt="6802 Junction Layout" />
+<img src="data/6802%20Layout.JPG" alt="6802 Junction Layout" />
 <figcaption aria-hidden="true">6802 Junction Layout</figcaption>
 </figure>
 

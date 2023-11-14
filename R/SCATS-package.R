@@ -10,11 +10,12 @@
 #'
 #' @format A data frame with 32 rows and 28 columns:
 #' \describe{
-#'   \item{Junctions}{Number of the junction}
-#'   \item{Date}{The date that the data were taken in}
-#'   \item{Approach}{Include the approch number and Detectors numbers,Each detector refers to a lane in the signal}
-#'   \item{Interval}{Data is collected in 15 minutes interval, that is why each appproch is repeted 4 times"15,30,45,60"}
-#'   \item{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}{Rferes to a 24 hour system of the day, so if we take the intersection of column with heading "1" and row that have Interval "15", this will refer to "1.15 am"}
+#'   \item{Junctions}{Number uniqe to the junction}
+#'   \item{Date}{The date of the day corresponding to the data}
+#'   \item{Approach}{Include the approch number and Detectors numbers,Each detector refers to a lane in the signal. Detectors are devided into approaches based on the direction, so the lanes that will bbe in the same directions will be grouped together}
+#'   \item{Interval}{Data is collected in 15 minutes interval. Which means when the interval refers to 15 and the hour refers to 13, this means that the number of vehicles in vehicles column is the total number time between 1.00 pm and 1.15 pm}
+#'   \item{hours}{Rferes to a 24 hour system of the day, starting from 0 to 23}
+#'   \item{vehicles}{Is the total number of vehicles in this approach at the 15 min interval indecated by Interval and hours columns}
 #' }
 #'
 #' @docType data

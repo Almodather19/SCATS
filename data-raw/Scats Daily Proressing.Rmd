@@ -20,7 +20,7 @@ Timing can be changed by giving more green time to an approach that have more fl
 ```{r}
 # Load the necessary library if not already loaded
 library(dplyr)
-
+library(tidyr)
 # Select the relevant columns for summing
 cols_to_sum <- c(10,17,21)
 
@@ -37,6 +37,15 @@ Summarizing the data will most importantly give the maximum number of cars passi
 ```{r}
 summary(X6802)
 ```
+
+```{r}
+X6802 |>
+  pivot_longer(cols = -c(Junctions:Interval),
+               names_to = "hours",
+               values_to = "vehicles")
+```
+
+
 Save to data folder:
 ```{r}
 usethis::use_data(X6802, overwrite = TRUE)
