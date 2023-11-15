@@ -1,6 +1,6 @@
 Package: SCATS
 Title: Calculating the total number of vehciles going throw approaches in peak hours
-Version: 0.0.0.9001
+Version: 0.0.0.9002
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
@@ -14,3 +14,7 @@ BugReports: https://github.com/Almodather19/SCATS/issues
 Depends: 
     R (>= 2.10)
 LazyData: true
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: rmarkdown

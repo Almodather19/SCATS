@@ -5,10 +5,8 @@ SCATS Package
 
 ------------------------------------------------------------------------
 
-The main objective of the package is to get number of vehicles that go
-throw each approach in three peak hours. Peak hours are “6 to 7 am”, “1
-to 2 pm”, and “5 to 6 pm”, which are refereed to as AM, MD, and PM
-respectively.
+This is mainly a data package where a slice of SCATS data has been
+cleaned, for easy use in an R environment.
 
 # Data Breakdown
 
@@ -21,8 +19,10 @@ network. In this system each signal will have a number. Signal 6802 in
 
 SCATS data uses detectors at the end of each lane in a signal to get the
 numbers of vehicles. As can be seen in the layout of 6802 junction we
-have 23 lane which indicate 23 detectors. However detectors are decided
-to approaches based on the direction of the traffic as follows:
+have 23 lane which indicate 23 detectors. In some cases the system will
+return the number of vehicles as NA which means that there is a shortage
+in the detectors assigned to that approach at that time. Detectors are
+assigned to approaches based on the direction of the traffic as follows:
 
 1.  Approach 1, Detectors: 1-3
 2.  Approach 2, Detectors: 4-5
@@ -39,7 +39,7 @@ to approaches based on the direction of the traffic as follows:
 </figure>
 
 Data is recorded on 15 min intervals that is why each approach in the
-data is repeated four times, as four rows will fourm 1 hour of the day.
+data is repeated four times, as four rows will form 1 hour of the day.
 Also, data is recorded for 24 hours starting form 0 to 23.
 
 # Usage
@@ -47,10 +47,11 @@ Also, data is recorded for 24 hours starting form 0 to 23.
 ------------------------------------------------------------------------
 
 By understanding the flow throw different approaches in the three peaks,
-the timing of the signals can be altered based on the peak. Timing can
-be changed by giving more green time to an approach that have more flow
-than others, another way to address the high flow for one approach is by
-changing the phasing.
+the timing of the signals can be altered based on the peak. Peak hours
+are “6 to 7 am”, “1 to 2 pm”, and “5 to 6 pm”, which are refereed to as
+AM, MD, and PM respectively. Timing can be changed by giving more green
+time to an approach that have more flow than others, another way to
+address the high flow for one approach is by changing the phasing.
 
 # Installation
 
@@ -59,6 +60,7 @@ changing the phasing.
 The package can be installed from GitHub with:
 
     install.packages("devtools")
+
     devtools::install_github("Almodather19/SCATS")
 
     To use the package

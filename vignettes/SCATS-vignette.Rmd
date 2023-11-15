@@ -1,0 +1,61 @@
+---
+title: "SCATS-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SCATS-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(SCATS)
+```
+
+The primary goal of the following function is to determine the number of vehicles passing through each approach during the three designated peak hours—namely, "6 to 7 am" (AM), "1 to 2 pm" (MD), and "5 to 6 pm" (PM).
+
+```{r load-packages, include=FALSE, cache=FALSE}
+# Load the necessary library if not already loaded
+library(dplyr)
+library(readxl)
+library(tidyr)
+```
+
+```{r message=FALSE, warning=FALSE, cache=FALSE}
+# Select the relevant columns for summing
+X6802 <- read_excel("6802.xlsx")
+cols_to_sum <- c(10,17,21)
+
+# Group by Approach and calculate the sum for the selected columns
+results <- X6802 %>%
+  group_by(Approach) %>%
+  summarise(across(all_of(cols_to_sum), sum, na.rm = TRUE))
+
+# Display the result
+print(results)
+```
+
+Summarizing the data will yield the highest car count within a 15-minute interval, along with the number of NA values, facilitating an analysis of both the peak rate and instances of shortages over time.
+
+```{r warning=FALSE}
+summary(X6802)
+```
+
+The objective of the following code is to reorganize the data, reducing the number of columns from 28 to 8, thereby facilitating a more straightforward description and analysis.
+
+```{r}
+X6802N <- X6802 |>
+#It selects all columns excluding those between "Junctions" and "Interval," transforming the data into a longer format. 
+#In this new format, the variable names are moved into a new column named "hours" while the corresponding values are placed in a separate column labeled "vehicles"
+  pivot_longer(cols = -c(Junctions:Interval),
+               names_to = "hours",
+               values_to = "vehicles")
+```
+

@@ -7,9 +7,10 @@ output:
 
 The data that the following code will process is called SCATS data. 
 
-SCATS data taken from a system that controls traffic signals in a network. In this system each signal will have a number.
+SCATS data taken from a system that controls traffic signals in a network which is managed by Road Management Center "RMC" Qatar. In this system each signal will have a unique number.
 
-Signal 6802 will be taken as an example. Data is saved in Excel file `6802.xlsx`
+The data represent the number of vehicles that go throw number of lanes in a time interval. As an example, Signal 6802 at 19/11/2021 data will be cleaned and processed. Data is saved in Excel file `6802.xlsx`. In the excel file number of vehicles can be indicated as NA or 0 in some time intervals. This indicate that detectors at this approach at that time had shortage and the data was not transferred.
+
 
 The main aim of the following function is to get number of vehicles that go throw each approach in three peak hours.
 Peak hours are "6 to 7 am", "1 to 2 pm", and "5 to 6 pm", which are refereed to as AM, MD, and PM respectively.
@@ -17,11 +18,13 @@ Peak hours are "6 to 7 am", "1 to 2 pm", and "5 to 6 pm", which are refereed to 
 By understanding the flow throw different approaches in the three peaks, the timing of the signals can be altered based on the peak.
 Timing can be changed by giving more green time to an approach that have more flow than others, another way to adjust the address the high flow for one approach is to change the phasing. 
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 # Load the necessary library if not already loaded
 library(dplyr)
+library(readxl)
 library(tidyr)
 # Select the relevant columns for summing
+X6802 <- read_excel("6802.xlsx")
 cols_to_sum <- c(10,17,21)
 
 # Group by Approach and calculate the sum for the selected columns
@@ -33,11 +36,14 @@ results <- X6802 %>%
 print(results)
 ```
 
-Summarizing the data will most importantly give the maximum number of cars passing an approach in a 15 min interval:
-```{r}
+
+Summarizing the data will give the maximum number of cars passing an approach in a 15 min interval and the number of NA's which will help in understanding the rate and times of shortage:
+
+```{r warning=FALSE}
 summary(X6802)
 ```
 
+The following code aims to rearrange the data. Instead of having 28 columns we will have 8 which will make it easier to describe and analyse. 
 ```{r}
 X6802N <- X6802 |>
   pivot_longer(cols = -c(Junctions:Interval),
@@ -48,7 +54,6 @@ X6802N <- X6802 |>
 
 Save to data folder:
 ```{r}
-usethis::use_data(X6802, overwrite = TRUE)
 usethis::use_data(X6802N, overwrite = TRUE)
 ```
 
