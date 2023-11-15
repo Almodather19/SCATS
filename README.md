@@ -68,4 +68,4 @@ The package can be installed from GitHub with:
 
 
     Data for the package
-    data("X6802")
+    data("X6802N")

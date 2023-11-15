@@ -53,5 +53,5 @@ library(SCATS)
 
 
 Data for the package
-data("X6802")
+data("X6802N")
 ```
