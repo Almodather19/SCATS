@@ -28,7 +28,7 @@ Detectors are assigned to approaches based on the direction of the traffic as fo
 8. Approach  8, Detectors:  20-23 
 
 
-![6802 Junction Layout](data/6802 Layout.JPG)
+![6802 Junction Layout](man/figures/6802Layout.JPG)
 
 Data is recorded on 15 min intervals that is why each approach in the data is repeated four times, as four rows will form 1 hour of the day. Also, data is recorded for 24 hours starting form 0 to 23.
 
