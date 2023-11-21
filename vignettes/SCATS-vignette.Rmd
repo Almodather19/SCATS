@@ -17,45 +17,42 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(SCATS)
+data("X6802N")
 ```
-
-The primary goal of the following function is to determine the number of vehicles passing through each approach during the three designated peak hours—namely, "6 to 7 am" (AM), "1 to 2 pm" (MD), and "5 to 6 pm" (PM).
 
 ```{r load-packages, include=FALSE, cache=FALSE}
 # Load the necessary library if not already loaded
-library(dplyr)
-library(readxl)
-library(tidyr)
+library(tidyverse)
 ```
 
+
+The primary goal of the following function is to create a daily profile of the total number of vehicles that go through junction 6802. which will help in understanding the flow of vehicles and to determine the peak hours specific to this junction and if it is the same as the general network peak hours or not. Peak hours intervals are the following: "6 to 9 am" (AM Peak), "12 to 3 pm" (MD Peak), "5 to 8 pm" (PM Peak). Network peak hours are:  "6 to 7 am" (AM), "1 to 2 pm" (MD), and "5 to 6 pm" (PM).
+
 ```{r message=FALSE, warning=FALSE, cache=FALSE}
-# Select the relevant columns for summing
-X6802 <- read_excel("6802.xlsx")
-cols_to_sum <- c(10,17,21)
 
-# Group by Approach and calculate the sum for the selected columns
-results <- X6802 %>%
-  group_by(Approach) %>%
-  summarise(across(all_of(cols_to_sum), sum, na.rm = TRUE))
+# Assigning X6802N data set into junction_data to work on
+junction_data <- X6802N %>%
+# AS the aim is to have a daily profile the data will be grouped passed on the hours form 0 to 23
+  group_by(hours) %>%
+# We sum vehicles into total_vehicles variable based on hours
+  summarise(total_vehicles = sum(vehicles, na.rm = TRUE))
+# As hours where not in order from 1 to 23. Here we convert "hours" to a factor to present it in the correct order
+junction_data$hours <- factor(junction_data$hours, levels = 0:23)
 
-# Display the result
-print(results)
+# Here we plot the daily profile
+ggplot(junction_data, aes(x = hours, y = total_vehicles)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "blue") +
+  labs(title = "Daily Profile (Sum of All Approaches)",
+      x = "Hours",
+      y = "Total Number of Vehicles")
+
 ```
 
 Summarizing the data will yield the highest car count within a 15-minute interval, along with the number of NA values, facilitating an analysis of both the peak rate and instances of shortages over time.
 
 ```{r warning=FALSE}
-summary(X6802)
+summary(X6802N)
 ```
 
-The objective of the following code is to reorganize the data, reducing the number of columns from 28 to 8, thereby facilitating a more straightforward description and analysis.
-
-```{r}
-X6802N <- X6802 |>
-#It selects all columns excluding those between "Junctions" and "Interval," transforming the data into a longer format. 
-#In this new format, the variable names are moved into a new column named "hours" while the corresponding values are placed in a separate column labeled "vehicles"
-  pivot_longer(cols = -c(Junctions:Interval),
-               names_to = "hours",
-               values_to = "vehicles")
-```
 
